@@ -130,3 +130,9 @@ body{
 .gumb-shrani:hover{
     background:#00aa00;
 }
+.spodaj a{
+    text-decoration:none;
+}
+.gumbi a{
+    text-decoration:none;
+}
