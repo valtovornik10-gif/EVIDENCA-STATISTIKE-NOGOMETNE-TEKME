@@ -93,6 +93,8 @@ body{
 .dogodki{
     border-top:1px solid #999;
     padding-top:10px; 
+	height:400px;
+    overflow:auto;
 	
 }
 
@@ -136,3 +138,35 @@ body{
 .gumbi a{
     text-decoration:none;
 }
+.reset-gumb{
+    background:#ff9900;
+    
+}
+.reset-gumb:hover{
+    background:#cc7a00;
+}
+.zgoraj-uporabnik{
+    text-align:right;
+    margin-bottom:15px;
+}
+
+.zgoraj-uporabnik{
+    text-align:right;
+    margin-bottom:15px;
+}
+
+.zgoraj-uporabnik .gumb-zapri{
+    background:#e74c3c;
+    color:white;
+    border:none;
+    padding:15px 30px;
+    border-radius:15px;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.zgoraj-uporabnik .gumb-zapri:hover{
+    background:#c0392b;
+}
+
