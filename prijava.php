@@ -24,15 +24,20 @@ session_start();
 
     <form action="prijava_preveri.php" method="POST">
 
-        <input type="text" name="uporabnisko_ime" placeholder="Uporabniško ime" required >
+        <input type="text" name="uporabnisko_ime" placeholder="Uporabniško ime" required>
 
-        <input type="password" name="geslo" placeholder="Geslo" required >
+        <input type="password" name="geslo" placeholder="Geslo" required>
 
         <button type="submit" name="prijava">
             PRIJAVA
         </button>
 
     </form>
+
+    <p>
+        Nimaš računa?
+        <a href="registracija.php">Registriraj se tukaj</a>
+    </p>
 
 </div>
 
