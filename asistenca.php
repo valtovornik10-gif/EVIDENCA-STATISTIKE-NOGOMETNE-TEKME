@@ -160,7 +160,7 @@ while($i = $rezultat->fetch_assoc()){
 
 <?php
 if($napaka != ""){
-    echo "<p style='color:red;font-weight:bold;'>".$napaka."</p>";
+    echo "<p>".$napaka."</p>";
 }
 ?>
 
