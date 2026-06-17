@@ -2,9 +2,9 @@
 
 <ul>
     <li><a href="https://www.w3schools.com/css/css3_box-sizing.asp">W3schools</a></li>
-    <li><a href="https://dev.mysql.com/doc">MYSQL</a></li>
+    <li><a href="https://www.w3schools.com/php/func_var_unset.asp">W3schools part2.</a></li>
     <li><a href="https://www.w3schools.com/php">W3</a></li>
-    <li><a href="https://developer.mozilla.org">Developer</a></li>
+    
 </ul>
 
 <a href="shrani.php">Nazaj</a>
