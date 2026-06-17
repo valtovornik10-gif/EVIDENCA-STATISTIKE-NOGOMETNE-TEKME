@@ -23,7 +23,7 @@ else{
     $ekipaId = $_SESSION['ekipa2_id'];
 }
 
-if($_SERVER["REQUEST_METHOD"]=="POST"){
+if(isset($_POST['igralecVen']) && isset($_POST['igralecNot'])){
 
     $igralecVen = $_POST['igralecVen'];
     $igralecNot = $_POST['igralecNot'];
@@ -37,18 +37,18 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     }
     else{
 
-	if(isset($_SESSION['zadnja_minuta'])){
-		$zadnjaMinuta = $_SESSION['zadnja_minuta'];
-	}
-	else{
-		$zadnjaMinuta = 0;
-	}
+        if(isset($_SESSION['zadnja_minuta'])){
+            $zadnjaMinuta = $_SESSION['zadnja_minuta'];
+        }
+        else{
+            $zadnjaMinuta = 0;
+        }
 
-	if($minuta < $zadnjaMinuta){
+        if($minuta < $zadnjaMinuta){
 
-		$napaka = "Vnesti moraš minuto ".$zadnjaMinuta." ali več.";
+            $napaka = "Vnesti moraš minuto ".$zadnjaMinuta." ali več.";
 
-	}
+        }
         else{
 
             $_SESSION['zadnja_minuta'] = $minuta;
@@ -106,11 +106,12 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
             else{
                 $_SESSION['dogodki2'][] = $izpis;
             }
-			if(!isset($_SESSION['izven_igre'])){
-				$_SESSION['izven_igre'] = [];
-			}
 
-			$_SESSION['izven_igre'][] = $igralecVen;
+            if(!isset($_SESSION['izven_igre'])){
+                $_SESSION['izven_igre'] = [];
+            }
+
+            $_SESSION['izven_igre'][] = $igralecVen;
 
             header("Location:index.php");
             exit;
@@ -123,6 +124,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 <html lang="sl">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dodaj menjavo</title>
 <link rel="stylesheet" href="glavna.css">
 </head>
