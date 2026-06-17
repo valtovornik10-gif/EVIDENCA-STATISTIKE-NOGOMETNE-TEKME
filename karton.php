@@ -23,7 +23,7 @@ else{
     $ekipaId = $_SESSION['ekipa2_id'];
 }
 
-if($_SERVER["REQUEST_METHOD"]=="POST"){
+if(isset($_POST['igralec'])){
 
     $igralecId = $_POST['igralec'];
     $minuta = $_POST['minuta'];
@@ -109,6 +109,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 <html lang="sl">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dodaj karton</title>
 <link rel="stylesheet" href="glavna.css">
 </head>
