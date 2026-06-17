@@ -16,7 +16,7 @@ include "baza.php";
 $ekipa = $_GET['ekipa'];
 $napaka = "";
 
-if($_SERVER["REQUEST_METHOD"]=="POST"){
+if(isset($_POST['igralec'])){
 
     $igralecId = $_POST['igralec'];
     $minuta = $_POST['minuta'];
