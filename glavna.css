@@ -103,8 +103,8 @@ button{
 .dogodki{
     border-top:1px solid #999;
     padding-top:10px;
-    height:400px;
-    
+    height:320px;
+    overflow-y:auto;
 }
 
 .dogodek{
@@ -166,19 +166,6 @@ button{
     height:70px;
 }
 
-.zgoraj-uporabnik .gumb-zapri{
-    background:#922b21;
-    color:white;
-    border:none;
-    padding:15px 30px;
-    border-radius:15px;
-    font-size:18px;
-    font-weight:bold;
-}
-
-.zgoraj-uporabnik .gumb-zapri:hover{
-    background:#78281f;
-}
 
 .admin-gumbi{
     float:left;
@@ -263,4 +250,17 @@ button{
     margin-top:10px;
     margin-bottom:10px;
     font-size:18px;
+}
+.gumb-odjava{
+    background:#922b21;
+    color:white;
+    border:none;
+    padding:15px 30px;
+    border-radius:15px;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.gumb-odjava:hover{
+    background:#78281f;
 }
