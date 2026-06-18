@@ -35,225 +35,245 @@ if(!isset($_SESSION['dogodki2'])){
 
 <div class="vsebnik">
 
-<div class="zgoraj-uporabnik">
-
-<?php
-if($_SESSION['vloga'] == "administrator"){
-?>
-<div class="admin-gumbi">
-
-    <a href="dodaj_ekipo.php">
-        <button type="button" class="gumb1">
-            DODAJ EKIPO
-        </button>
-    </a>
-
-    <a href="dodaj_igralca.php">
-        <button type="button" class="gumb1">
-            DODAJ IGRALCA
-        </button>
-    </a>
-
-</div>
-<?php
-}
-?>
-
-<div class="odjava-gumb">
-
-    <a href="odjava.php">
-        <button type="button" class="gumb-zapri">
-            ODJAVA
-        </button>
-    </a>
-
-    <p class="prijavljen">
-        <?php echo $_SESSION['uporabnik']; ?>
-        (<?php echo $_SESSION['vloga']; ?>)
-    </p>
-
-</div>
-
-</div>
-
-<div class="zgoraj">
-
-    <div class="levo-ime">
+    <div class="zgoraj-uporabnik">
 
         <?php
-
-        if(!isset($_SESSION['ime_ekipa1'])){
-            $_SESSION['ime_ekipa1'] = "Domači";
-        }
-
-        echo $_SESSION['ime_ekipa1'];
-
+        if($_SESSION['vloga'] == "administrator"){
         ?>
+            <div class="admin-gumbi">
 
-    </div>
+                <a href="dodaj_ekipo.php">
+                    <button type="button" class="gumb1">
+                        DODAJ EKIPO
+                    </button>
+                </a>
 
-    <div class="sredina">
+                <a href="dodaj_igralca.php">
+                    <button type="button" class="gumb1">
+                        DODAJ IGRALCA
+                    </button>
+                </a>
 
-        <a href="izberi_ekipi.php">
-            <button type="button" class="gumb-ekipi">
-                IZBERI EKIPI
-            </button>
-        </a>
-
-        <div class="naslov-rezultat">
-            REZULTAT
-        </div>
-
-        <div class="rezultat">
-            <?php
-            echo $_SESSION['gol1']." : ".$_SESSION['gol2'];
-            ?>
-        </div>
-
-        <div class="minuta">0'</div>
-		<?php
-
-		if(isset($_SESSION['sporocilo'])){
-
-			echo "<div class='sporocilo'>";
-			echo $_SESSION['sporocilo'];
-			echo "</div>";
-
-			unset($_SESSION['sporocilo']);
-		}
-		?>
-
-        <br>
-
-        <a href="zacetek.php">
-            <button type="button" class="gumb-zacetek">
-                ZAČNI TEKMO
-            </button>
-        </a>
-
-        <a href="konec.php">
-            <button type="button" class="gumb-konec">
-                KONČAJ TEKMO
-            </button>
-        </a>
-
-
-    </div>
-
-    <div class="desno-ime">
-
+            </div>
         <?php
-
-        if(!isset($_SESSION['ime_ekipa2'])){
-            $_SESSION['ime_ekipa2'] = "Gostje";
         }
-
-        echo $_SESSION['ime_ekipa2'];
-
         ?>
 
+        <div class="odjava-gumb">
+
+            <a href="odjava.php">
+                <button type="button" class="gumb-odjava">
+                    ODJAVA
+                </button>
+            </a>
+
+            <p class="prijavljen">
+                <?php echo $_SESSION['uporabnik']; ?>
+                (<?php echo $_SESSION['vloga']; ?>)
+            </p>
+
+        </div>
+
     </div>
 
-</div>
+    <div class="zgoraj">
 
-<div class="glavni-del">
+        <div class="levo-ime">
 
-    <div class="stran">
+            <?php
 
-        <div class="gumbi">
+            if(!isset($_SESSION['ime_ekipa1'])){
+                $_SESSION['ime_ekipa1'] = "Domači";
+            }
 
-            <a href="gol.php?ekipa=1">
-                <button type="button">DODAJ GOL</button>
+            echo $_SESSION['ime_ekipa1'];
+
+            ?>
+
+        </div>
+
+        <div class="sredina">
+
+            <a href="izberi_ekipi.php">
+                <button type="button" class="gumb-ekipi">
+                    IZBERI EKIPI
+                </button>
             </a>
 
-            <a href="asistenca.php?ekipa=1">
-                <button type="button">DODAJ ASISTENCO</button>
+            <div class="naslov-rezultat">
+                REZULTAT
+            </div>
+
+            <div class="rezultat">
+                <?php
+                echo $_SESSION['gol1']." : ".$_SESSION['gol2'];
+                ?>
+            </div>
+
+            <div class="minuta">
+                0'
+            </div>
+
+            <?php
+
+            if(isset($_SESSION['sporocilo'])){
+
+                echo "<div class='sporocilo'>";
+                echo $_SESSION['sporocilo'];
+                echo "</div>";
+
+                unset($_SESSION['sporocilo']);
+            }
+
+            ?>
+
+            <br>
+
+            <a href="zacetek.php">
+                <button type="button" class="gumb-zacetek">
+                    ZAČNI TEKMO
+                </button>
             </a>
 
-            <a href="karton.php?ekipa=1">
-                <button type="button">DODAJ KARTON</button>
-            </a>
-
-            <a href="menjava.php?ekipa=1">
-                <button type="button">DODAJ MENJAVO</button>
+            <a href="konec.php">
+                <button type="button" class="gumb-konec">
+                    KONČAJ TEKMO
+                </button>
             </a>
 
         </div>
 
-        <div class="dogodki">
+        <div class="desno-ime">
 
             <?php
-            foreach($_SESSION['dogodki1'] as $d){
-                echo "<div class='dogodek'>$d</div>";
+
+            if(!isset($_SESSION['ime_ekipa2'])){
+                $_SESSION['ime_ekipa2'] = "Gostje";
             }
+
+            echo $_SESSION['ime_ekipa2'];
+
             ?>
 
         </div>
 
     </div>
-	    <div class="stran">
 
-        <div class="gumbi">
+    <div class="glavni-del">
 
-            <a href="gol.php?ekipa=2">
-                <button type="button">DODAJ GOL</button>
-            </a>
+        <div class="stran">
 
-            <a href="asistenca.php?ekipa=2">
-                <button type="button">DODAJ ASISTENCO</button>
-            </a>
+            <div class="gumbi">
 
-            <a href="karton.php?ekipa=2">
-                <button type="button">DODAJ KARTON</button>
-            </a>
+                <a href="gol.php?ekipa=1">
+                    <button type="button">
+                        DODAJ GOL
+                    </button>
+                </a>
 
-            <a href="menjava.php?ekipa=2">
-                <button type="button">DODAJ MENJAVO</button>
-            </a>
+                <a href="asistenca.php?ekipa=1">
+                    <button type="button">
+                        DODAJ ASISTENCO
+                    </button>
+                </a>
+
+                <a href="karton.php?ekipa=1">
+                    <button type="button">
+                        DODAJ KARTON
+                    </button>
+                </a>
+
+                <a href="menjava.php?ekipa=1">
+                    <button type="button">
+                        DODAJ MENJAVO
+                    </button>
+                </a>
+
+            </div>
+
+            <div class="dogodki">
+
+                <?php
+                foreach($_SESSION['dogodki1'] as $d){
+                    echo "<div class='dogodek'>$d</div>";
+                }
+                ?>
+
+            </div>
 
         </div>
 
-        <div class="dogodki">
+        <div class="stran">
 
-            <?php
-            foreach($_SESSION['dogodki2'] as $d){
-                echo "<div class='dogodek'>$d</div>";
-            }
-            ?>
+            <div class="gumbi">
+
+                <a href="gol.php?ekipa=2">
+                    <button type="button">
+                        DODAJ GOL
+                    </button>
+                </a>
+
+                <a href="asistenca.php?ekipa=2">
+                    <button type="button">
+                        DODAJ ASISTENCO
+                    </button>
+                </a>
+
+                <a href="karton.php?ekipa=2">
+                    <button type="button">
+                        DODAJ KARTON
+                    </button>
+                </a>
+
+                <a href="menjava.php?ekipa=2">
+                    <button type="button">
+                        DODAJ MENJAVO
+                    </button>
+                </a>
+
+            </div>
+
+            <div class="dogodki">
+
+                <?php
+                foreach($_SESSION['dogodki2'] as $d){
+                    echo "<div class='dogodek'>$d</div>";
+                }
+                ?>
+
+            </div>
 
         </div>
 
     </div>
 
-</div>
+    <div class="spodaj">
 
-<div class="spodaj">
-
-    <?php
-    if($_SESSION['vloga'] == "administrator"){
-    ?>
+        
+        
+        
         <a href="reset.php">
             <button type="button" class="reset-gumb">
                 RESET
             </button>
         </a>
-    <?php
-    }
-    ?>
+       
+        
+        
 
-    <a href="zapri.php">
-        <button type="button" class="gumb-zapri">
-            ZAPRI
-        </button>
-    </a>
+        <a href="zapri.php">
+            <button type="button" class="gumb-zapri">
+                ZAPRI
+            </button>
+        </a>
 
-    <a href="shrani.php">
-        <button type="button" class="gumb-shrani">
-            SHRANI IN ZAKLJUČI
-        </button>
-    </a>
+        <a href="shrani.php">
+            <button type="button" class="gumb-shrani">
+                SHRANI IN ZAKLJUČI
+            </button>
+        </a>
 
-</div>
+    </div>
 
 </div>
 
