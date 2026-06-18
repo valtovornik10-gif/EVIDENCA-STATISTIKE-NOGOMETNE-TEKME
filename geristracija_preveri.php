@@ -8,32 +8,27 @@ if(isset($_POST['registracija'])){
     $uporabnisko_ime = $_POST['uporabnisko_ime'];
     $geslo = $_POST['geslo'];
 
-    $preveri = $mysqli->query("
-        SELECT *
-        FROM uporabnik
-        WHERE uporabnisko_ime='$uporabnisko_ime'
-    ");
+    $sql = "SELECT * FROM uporabnik
+            WHERE uporabnisko_ime='$uporabnisko_ime'";
 
-    if($preveri->num_rows > 0){
+    $preveri = mysqli_query($conn, $sql);
 
-        $_SESSION['napaka'] =
-            "Uporabniško ime že obstaja!";
+    if(mysqli_num_rows($preveri) > 0){
+
+        $_SESSION['napaka'] = "Uporabniško ime že obstaja!";
 
         header("Location: registracija.php");
-        exit;
+        exit();
     }
 
-    $mysqli->query("
-        INSERT INTO uporabnik
-        (uporabnisko_ime, geslo, vloga)
-        VALUES
-        ('$uporabnisko_ime', '$geslo', 'uporabnik')
-    ");
+    $sql = "INSERT INTO uporabnik
+            (uporabnisko_ime, geslo, vloga)
+            VALUES
+            ('$uporabnisko_ime', '$geslo', 'uporabnik')";
 
-    $_SESSION['uspeh'] =
-        "Registracija uspešna!";
+    mysqli_query($conn, $sql);
 
     header("Location: prijava.php");
-    exit;
+    exit();
 }
 ?>
