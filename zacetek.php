@@ -10,7 +10,7 @@ if(!isset($_SESSION['ekipa1_id']) || !isset($_SESSION['ekipa2_id'])){
 $domaca = $_SESSION['ekipa1_id'];
 $gostujoca = $_SESSION['ekipa2_id'];
 
-$mysqli->query("
+$sql = "
 INSERT INTO tekma
 (
     stadion,
@@ -19,13 +19,15 @@ INSERT INTO tekma
 )
 VALUES
 (
-    'Neznan stadion',
+    'stadion',
     $domaca,
     $gostujoca
 )
-");
+";
 
-$_SESSION['tekma_id'] = $mysqli->insert_id;
+mysqli_query($conn, $sql);
+
+$_SESSION['tekma_id'] = mysqli_insert_id($conn);
 
 $_SESSION['gol1'] = 0;
 $_SESSION['gol2'] = 0;
@@ -35,9 +37,10 @@ $_SESSION['dogodki2'] = [];
 
 unset($_SESSION['zadnja_minuta']);
 unset($_SESSION['izloceni']);
+unset($_SESSION['izven_igre']);
 
 $_SESSION['sporocilo'] = "Tekma se je začela.";
 
-header("Location:index.php");
+header("Location: index.php");
 exit;
 ?>
