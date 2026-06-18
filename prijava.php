@@ -6,6 +6,7 @@ session_start();
 <html lang="sl">
 <head>
     <meta charset="UTF-8">
+
     <title>Prijava</title>
     <link rel="stylesheet" href="prijava.css">
 </head>
@@ -28,9 +29,7 @@ session_start();
 
         <input type="password" name="geslo" placeholder="Geslo" required>
 
-        <button type="submit" name="prijava">
-            PRIJAVA
-        </button>
+        <button type="submit" name="prijava"> PRIJAVA </button>
 
     </form>
 
