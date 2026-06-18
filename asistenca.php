@@ -23,11 +23,11 @@ if(isset($_POST['igralec'])){
     $ekipa = $_POST['ekipa'];
 
     if(isset($_SESSION['zadnja_minuta'])){
-		$zadnjaMinuta = $_SESSION['zadnja_minuta'];
-	}
-	else{
-		$zadnjaMinuta = 0;
-	}
+        $zadnjaMinuta = $_SESSION['zadnja_minuta'];
+    }
+    else{
+        $zadnjaMinuta = 0;
+    }
 
     if($minuta < $zadnjaMinuta){
 
@@ -38,13 +38,15 @@ if(isset($_POST['igralec'])){
 
         $_SESSION['zadnja_minuta'] = $minuta;
 
-        $rez = $mysqli->query("
+        $sql = "
             SELECT ime, priimek
             FROM igralec
             WHERE id = $igralecId
-        ");
+        ";
 
-        $igralec = $rez->fetch_assoc();
+        $rez = mysqli_query($conn, $sql);
+
+        $igralec = mysqli_fetch_assoc($rez);
 
         $imeIgralca =
             $igralec['ime']." ".
@@ -52,7 +54,7 @@ if(isset($_POST['igralec'])){
 
         $izpis = $imeIgralca." ".$minuta."' asistenca";
 
-        $mysqli->query("
+        $sql = "
             INSERT INTO dogodek
             (
                 minuta,
@@ -69,7 +71,9 @@ if(isset($_POST['igralec'])){
                 ".$_SESSION['id'].",
                 2
             )
-        ");
+        ";
+
+        mysqli_query($conn, $sql);
 
         if($ekipa == 1){
             $_SESSION['dogodki1'][] = $izpis;
@@ -114,14 +118,16 @@ else{
 
 <?php
 
-$rezultat = $mysqli->query("
+$sql = "
 SELECT *
 FROM igralec
 WHERE ekipa_id = $ekipaId
 ORDER BY priimek
-");
+";
 
-while($i = $rezultat->fetch_assoc()){
+$rezultat = mysqli_query($conn, $sql);
+
+while($i = mysqli_fetch_assoc($rezultat)){
 
     if(
         isset($_SESSION['izloceni']) &&
@@ -150,11 +156,11 @@ while($i = $rezultat->fetch_assoc()){
 
 <p>Minuta:</p>
 
-<input type="number" name="minuta" min="1" max="90" required >
+<input type="number" name="minuta" min="1" max="90" required>
 
 <br><br>
 
-<button type="submit"> SHRANI ASISTENCO </button>
+<button type="submit">SHRANI ASISTENCO</button>
 
 </form>
 
@@ -167,7 +173,7 @@ if($napaka != ""){
 <br>
 
 <a href="index.php">
-    <button type="button"> Nazaj </button>
+    <button type="button">Nazaj</button>
 </a>
 
 </div>
