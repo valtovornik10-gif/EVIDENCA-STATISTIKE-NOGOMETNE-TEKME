@@ -4,263 +4,49 @@
 }
 
 body{
+    margin:0;
     background:#2c3e50;
-    padding:30px;
     text-align:center;
 }
 
-.vsebnik{
-    max-width:1200px;
-    width:100%;
-    margin:auto;
+.login-box{
+    width:400px;
     background:white;
-    padding:20px;
+    padding:30px;
     border-radius:10px;
+    margin:180px auto;
 }
 
-.zgoraj{
-    background:#1a2533;
-    padding:20px;
-    border-radius:10px;
-    margin-bottom:20px;
+h1{
+    color:#1f3c88;
+    margin-bottom:30px;
 }
 
-.levo-ime{
-    float:left;
-    font-size:35px;
-    font-weight:bold;
-    color:#ecf0f1;
-}
-
-.desno-ime{
-    float:right;
-    font-size:35px;
-    font-weight:bold;
-    color:#ecf0f1;
-}
-
-.sredina{
-    display:inline-block;
-    text-align:center;
-}
-
-.naslov-rezultat{
-    font-size:18px;
-    color:#ffffff;
-	font-weight:bold;
-}
-
-.rezultat{
-    font-size:65px;
-    font-weight:bold;
-    color:#ffffff;
-}
-
-.minuta{
-    font-size:22px;
-    color:#ecf0f1;
-}
-
-.glavni-del{
-    margin-top:20px;
-    text-align:center;
-}
-
-.stran{
-    display:inline-block;
-    width:49%;
-    background:#f8f9fa;
-    border:1px solid #d6d6d6;
-    border-radius:10px;
-    padding:15px;
-    height:500px;
-    vertical-align:top;
-}
-
-.gumbi{
-    margin-bottom:20px;
+input{
+    width:100%;
+    padding:12px;
+    margin-bottom:15px;
+    border:1px solid #ccc;
+    border-radius:5px;
 }
 
 button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:5px;
+    background:#3498db;
+    color:white;
+    font-weight:bold;
     cursor:pointer;
-    
 }
 
-.gumbi button{
-    padding:10px;
-    border:none;
-    background:#34495e;
-    color:white;
-    border-radius:5px;
-    margin:5px;
-    font-weight:bold;
+button:hover{
+    background:#217dbb;
 }
 
-.gumbi button:hover{
-    background:#22313f;
-}
-
-.dogodki{
-    border-top:1px solid #999;
-    padding-top:10px;
-    height:320px;
-    overflow-y:auto;
-}
-
-.dogodek{
-    padding:8px;
-    margin-bottom:5px;
-    background:white;
-    border-left:4px solid #34495e;
-    border-radius:5px;
-}
-.spodaj{
+.napaka{
+    color:red;
     margin-top:15px;
-}
-
-.spodaj button{
-    padding:12px 20px;
-    border:none;
-    color:white;
-    border-radius:5px;
     font-weight:bold;
-    margin:10px;
-}
-
-.gumb-zapri{
-    background:#922b21;
-    text-align:left;
-}
-
-.gumb-zapri:hover{
-    background:#78281f;
-}
-
-.gumb-shrani{
-    background:#1e8449;
-    text-align:right;
-}
-
-.gumb-shrani:hover{
-    background:#196f3d;
-}
-
-.spodaj a{
-    text-decoration:none;
-}
-
-.gumbi a{
-    text-decoration:none;
-}
-
-.reset-gumb{
-    background:#af601a;
-}
-
-.reset-gumb:hover{
-    background:#935116;
-}
-
-.zgoraj-uporabnik{
-    margin-bottom:15px;
-    height:70px;
-}
-
-
-.admin-gumbi{
-    float:left;
-}
-
-.odjava-gumb{
-    float:right;
-    text-align:right;
-}
-
-.prijavljen{
-    margin-top:10px;
-    font-weight:bold;
-    font-size:18px;
-    color:#2c3e50;
-}
-
-.gumb-zacetek{
-    background:#2c3e50;
-    color:white;
-    border:none;
-    padding:12px 20px;
-    border-radius:8px;
-    font-weight:bold;
-    margin:5px;
-}
-
-.gumb-zacetek:hover{
-    background:#196f3d;
-}
-
-.gumb-konec{
-    background:#2c3e50;
-    color:white;
-    border:none;
-    padding:12px 20px;
-    border-radius:8px;
-    font-weight:bold;
-    margin:5px;
-}
-
-.gumb-konec:hover{
-    background:#78281f;
-}
-.gumb1{
-	background:#2980b9;
-	padding:12px 20px;
-    border:none;
-    color:white;
-    border-radius:5px;
-    font-weight:bold;
-    margin:10px;
-}
-.admin-gumbi a{
-    text-decoration:none;
-    
-}
-.sredina a{
-    text-decoration:none;
-}
-.gumb-ekipi{
-    background:#3b4f66;
-    color:white;
-    border:none;
-    padding:10px ;
-    border-radius:6px;
-    font-weight:bold;
-	margin-bottom:5px;
-}
-
-.gumb-ekipi:hover{
-    background:#4b627d;
-}
-
-
-.zadnji a{
-    text-decoration:none;
-}
-.sporocilo{
-    color:#ffffff;
-    font-weight:bold;
-    margin-top:10px;
-    margin-bottom:10px;
-    font-size:18px;
-}
-.gumb-odjava{
-    background:#922b21;
-    color:white;
-    border:none;
-    padding:15px 30px;
-    border-radius:15px;
-    font-size:18px;
-    font-weight:bold;
-}
-
-.gumb-odjava:hover{
-    background:#78281f;
 }
