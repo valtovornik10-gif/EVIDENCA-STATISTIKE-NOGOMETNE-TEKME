@@ -8,7 +8,7 @@ if($_SESSION['vloga'] != "administrator"){
 
 include "baza.php";
 
-if($_SERVER["REQUEST_METHOD"]=="POST"){
+if(isset($_POST['ime']) && isset($_POST['priimek'])){
 
     $ime = $_POST['ime'];
     $priimek = $_POST['priimek'];
@@ -16,7 +16,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     $pozicija = $_POST['pozicija'];
     $ekipa = $_POST['ekipa'];
 
-    $mysqli->query("
+    $sql = "
     INSERT INTO igralec
     (
         ime,
@@ -33,7 +33,9 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         '$pozicija',
         $ekipa
     )
-    ");
+    ";
+
+    mysqli_query($conn, $sql);
 
     header("Location:index.php");
     exit;
@@ -44,6 +46,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 <html lang="sl">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dodaj igralca</title>
 <link rel="stylesheet" href="glavna.css">
 </head>
@@ -51,83 +54,74 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 
 <div class="vsebnik">
 
-    <h1>DODAJ IGRALCA</h1>
+<h1>DODAJ IGRALCA</h1>
 
-    <form method="POST">
+<form method="POST">
 
-        <p>Ime:</p>
-        <input type="text" name="ime" required>
+<p>Ime:</p>
+<input type="text" name="ime" required>
 
-        <br><br>
+<br><br>
 
-        <p>Priimek:</p>
-        <input type="text" name="priimek" required>
+<p>Priimek:</p>
+<input type="text" name="priimek" required>
 
-        <br><br>
+<br><br>
 
-        <p>Številka:</p>
-        <input type="number" name="stevilka" min="1" max="99" required>
+<p>Številka:</p>
+<input type="number" name="stevilka" min="1" max="99" required>
 
-        <br><br>
+<br><br>
 
-        <p>Pozicija:</p>
+<p>Pozicija:</p>
 
-        <select name="pozicija">
+<select name="pozicija">
 
-            <option value="Vratar">
-                Vratar
-            </option>
+    <option value="Vratar">Vratar</option>
+    <option value="Branilec">Branilec</option>
+    <option value="Vezist">Vezist</option>
+    <option value="Napadalec">Napadalec</option>
 
-            <option value="Branilec">
-                Branilec
-            </option>
+</select>
 
-            <option value="Vezist">
-                Vezist
-            </option>
+<br><br>
 
-            <option value="Napadalec">
-                Napadalec
-            </option>
+<p>Ekipa:</p>
 
-        </select>
+<select name="ekipa">
 
-        <br><br>
+<?php
 
-        <p>Ekipa:</p>
+$sql = "
+SELECT *
+FROM ekipa
+ORDER BY naziv
+";
 
-        <select name="ekipa">
+$rezultat = mysqli_query($conn, $sql);
 
-        <?php
+while($e = mysqli_fetch_assoc($rezultat)){
 
-        $rezultat = $mysqli->query("
-        SELECT *
-        FROM ekipa
-        ORDER BY naziv
-        ");
+    echo "<option value='".$e['id']."'>";
+    echo $e['naziv'];
+    echo "</option>";
+}
 
-        while($e = $rezultat->fetch_assoc()){
+?>
 
-            echo "<option value='".$e['id']."'>";
-            echo $e['naziv'];
-            echo "</option>";
-        }
+</select>
 
-        ?>
+<br><br>
 
-        </select>
+<button type="submit">SHRANI IGRALCA</button>
 
-        <br><br>
+</form>
 
-        <button type="submit">SHRANI IGRALCA</button>
+<br>
 
-    </form>
-
-    <br>
-
-    <a href="index.php">
-        <button type="button">NAZAJ</button>
-    </a>
+<a href="index.php">
+    <button type="button">NAZAJ</button>
+</a>
 
 </div>
 
