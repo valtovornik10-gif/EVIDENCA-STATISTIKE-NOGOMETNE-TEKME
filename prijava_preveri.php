@@ -3,23 +3,20 @@ session_start();
 
 require_once "baza.php";
 
-if(isset($_POST['prijava'])){
+if (isset($_POST['prijava'])) {
 
     $uporabnisko_ime = $_POST['uporabnisko_ime'];
     $geslo = $_POST['geslo'];
 
-    $sql = "
-    SELECT *
-    FROM uporabnik
-    WHERE uporabnisko_ime='$uporabnisko_ime'
-    AND geslo='$geslo'
-    ";
+    $sql = "SELECT * FROM uporabnik 
+            WHERE uporabnisko_ime = '$uporabnisko_ime' 
+            AND geslo = '$geslo'";
 
-    $result = $mysqli->query($sql);
+    $result = mysqli_query($conn, $sql);
 
-    if($result->num_rows == 1){
+    if (mysqli_num_rows($result) == 1) {
 
-        $uporabnik = $result->fetch_assoc();
+        $uporabnik = mysqli_fetch_assoc($result);
 
         $_SESSION['prijavljen'] = true;
         $_SESSION['uporabnik'] = $uporabnik['uporabnisko_ime'];
@@ -27,14 +24,16 @@ if(isset($_POST['prijava'])){
         $_SESSION['id'] = $uporabnik['id'];
 
         header("Location: index.php");
-        exit;
-    }
-    else{
+        exit();
+    } else {
 
         $_SESSION['napaka'] = "Napačno uporabniško ime ali geslo!";
 
         header("Location: prijava.php");
-        exit;
+        exit();
     }
 }
 ?>
+
+
+
