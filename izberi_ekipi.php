@@ -4,7 +4,7 @@ include "baza.php";
 
 $napaka = "";
 
-if($_SERVER["REQUEST_METHOD"]=="POST"){
+if(isset($_POST['ekipa1']) && isset($_POST['ekipa2'])){
 
     $ekipa1 = $_POST['ekipa1'];
     $ekipa2 = $_POST['ekipa2'];
@@ -19,20 +19,24 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         $_SESSION['ekipa1_id'] = $ekipa1;
         $_SESSION['ekipa2_id'] = $ekipa2;
 
-        $rez1 = $mysqli->query("
+        $sql = "
             SELECT naziv
             FROM ekipa
             WHERE id = $ekipa1
-        ");
+        ";
 
-        $rez2 = $mysqli->query("
+        $rez1 = mysqli_query($conn, $sql);
+
+        $sql = "
             SELECT naziv
             FROM ekipa
             WHERE id = $ekipa2
-        ");
+        ";
 
-        $ekipa1Podatki = $rez1->fetch_assoc();
-        $ekipa2Podatki = $rez2->fetch_assoc();
+        $rez2 = mysqli_query($conn, $sql);
+
+        $ekipa1Podatki = mysqli_fetch_assoc($rez1);
+        $ekipa2Podatki = mysqli_fetch_assoc($rez2);
 
         $_SESSION['ime_ekipa1'] = $ekipa1Podatki['naziv'];
         $_SESSION['ime_ekipa2'] = $ekipa2Podatki['naziv'];
@@ -46,83 +50,88 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 <!DOCTYPE html>
 <html lang="sl">
 <head>
-    <meta charset="UTF-8">
-    <title>Izbira ekip</title>
-    <link rel="stylesheet" href="glavna.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Izbira ekip</title>
+<link rel="stylesheet" href="glavna.css">
 </head>
 <body>
 
 <div class="vsebnik">
 
-    <h1>IZBERI EKIPI</h1>
+<h1>IZBERI EKIPI</h1>
 
-    <form method="POST">
+<form method="POST">
 
-        <p>Domača ekipa:</p>
+<p>Domača ekipa:</p>
 
-        <select name="ekipa1" required>
+<select name="ekipa1" required>
 
-            <?php
+<?php
 
-            $rezultat = $mysqli->query("
-                SELECT *
-                FROM ekipa
-                ORDER BY naziv
-            ");
+$sql = "
+SELECT *
+FROM ekipa
+ORDER BY naziv
+";
 
-            while($vrstica = $rezultat->fetch_assoc()){
+$rezultat = mysqli_query($conn, $sql);
 
-                echo "<option value='".$vrstica['id']."'>";
-                echo $vrstica['naziv'];
-                echo "</option>";
-            }
+while($vrstica = mysqli_fetch_assoc($rezultat)){
 
-            ?>
+    echo "<option value='".$vrstica['id']."'>";
+    echo $vrstica['naziv'];
+    echo "</option>";
+}
 
-        </select>
+?>
 
-        <br><br>
+</select>
 
-        <p>Gostujoča ekipa:</p>
+<br><br>
 
-        <select name="ekipa2" required>
+<p>Gostujoča ekipa:</p>
 
-            <?php
+<select name="ekipa2" required>
 
-            $rezultat = $mysqli->query("
-                SELECT *
-                FROM ekipa
-                ORDER BY naziv
-            ");
+<?php
 
-            while($vrstica = $rezultat->fetch_assoc()){
+$sql = "
+SELECT *
+FROM ekipa
+ORDER BY naziv
+";
 
-                echo "<option value='".$vrstica['id']."'>";
-                echo $vrstica['naziv'];
-                echo "</option>";
-            }
+$rezultat = mysqli_query($conn, $sql);
 
-            ?>
+while($vrstica = mysqli_fetch_assoc($rezultat)){
 
-        </select>
+    echo "<option value='".$vrstica['id']."'>";
+    echo $vrstica['naziv'];
+    echo "</option>";
+}
 
-        <br><br>
+?>
 
-        <button type="submit">SHRANI EKIPI</button>
+</select>
 
-    </form>
+<br><br>
 
-    <?php
-    if($napaka != ""){
-        echo $napaka;
-    }
-    ?>
+<button type="submit">SHRANI EKIPI</button>
 
-    <br><br>
+</form>
 
-    <a href="index.php">
-        <button type="button">NAZAJ</button>
-    </a>
+<?php
+if($napaka != ""){
+    echo "<p>".$napaka."</p>";
+}
+?>
+
+<br><br>
+
+<a href="index.php">
+    <button type="button">NAZAJ</button>
+</a>
 
 </div>
 
