@@ -1,15 +1,14 @@
-
 <?php
 session_start();
 
-if(!isset($_SESSION['ekipa1_id']) || !isset($_SESSION['ekipa2_id'])){
+if (!isset($_SESSION['ekipa1_id']) || !isset($_SESSION['ekipa2_id'])) {
     header("Location: izberi_ekipi.php");
-    exit;
+    exit();
 }
 
-if(!isset($_SESSION['tekma_id'])){
+if (!isset($_SESSION['tekma_id'])) {
     header("Location: zacetek.php");
-    exit;
+    exit();
 }
 
 include "baza.php";
@@ -17,35 +16,42 @@ include "baza.php";
 $ekipa = $_GET['ekipa'];
 $napaka = "";
 
-if(isset($_POST['igralec'])){
+if ($ekipa == 1) {
+    $ekipaId = $_SESSION['ekipa1_id'];
+} else {
+    $ekipaId = $_SESSION['ekipa2_id'];
+}
+
+if (isset($_POST['igralec'])) {
 
     $igralecId = $_POST['igralec'];
     $minuta = $_POST['minuta'];
     $ekipa = $_POST['ekipa'];
 
-    if(isset($_SESSION['zadnja_minuta'])){
-		$zadnjaMinuta = $_SESSION['zadnja_minuta'];
-	}
-	else{
-		$zadnjaMinuta = 0;
-	}
+    if (isset($_SESSION['zadnja_minuta'])) {
+        $zadnjaMinuta = $_SESSION['zadnja_minuta'];
+    } else {
+        $zadnjaMinuta = 0;
+    }
 
-    if($minuta < $zadnjaMinuta){
+    if ($minuta < $zadnjaMinuta) {
 
         $napaka = "Vnesti moraš minuto ".$zadnjaMinuta." ali več.";
 
     }
-    else{
+    else {
 
         $_SESSION['zadnja_minuta'] = $minuta;
 
-        $rez = $mysqli->query("
+        $sql = "
             SELECT ime, priimek
             FROM igralec
             WHERE id = $igralecId
-        ");
+        ";
 
-        $igralec = $rez->fetch_assoc();
+        $rez = mysqli_query($conn, $sql);
+
+        $igralec = mysqli_fetch_assoc($rez);
 
         $imeIgralca =
             $igralec['ime']." ".
@@ -53,7 +59,7 @@ if(isset($_POST['igralec'])){
 
         $izpis = $imeIgralca." ".$minuta."' gol";
 
-        $mysqli->query("
+        $sql = "
             INSERT INTO dogodek
             (
                 minuta,
@@ -67,32 +73,27 @@ if(isset($_POST['igralec'])){
                 $minuta,
                 ".$_SESSION['tekma_id'].",
                 $igralecId,
-                ".$_SESSION['id'].", 1
+                ".$_SESSION['id'].",
+                1
             )
-        ");
+        ";
 
-        if($ekipa == 1){
+        mysqli_query($conn, $sql);
+
+        if ($ekipa == 1) {
             $_SESSION['gol1']++;
             $_SESSION['dogodki1'][] = $izpis;
         }
-        else{
+        else {
             $_SESSION['gol2']++;
             $_SESSION['dogodki2'][] = $izpis;
         }
 
-        header("Location:index.php");
-        exit;
+        header("Location: index.php");
+        exit();
     }
 }
-
-if($ekipa == 1){
-    $ekipaId = $_SESSION['ekipa1_id'];
-}
-else{
-    $ekipaId = $_SESSION['ekipa2_id'];
-}
 ?>
-
 <!DOCTYPE html>
 <html lang="sl">
 <head>
@@ -114,16 +115,19 @@ else{
 
 <select name="igralec" required>
 
+
 <?php
 
-$rezultat = $mysqli->query("
+$sql = "
 SELECT *
 FROM igralec
 WHERE ekipa_id = $ekipaId
 ORDER BY priimek
-");
+";
 
-while($i = $rezultat->fetch_assoc()){
+$rezultat = mysqli_query($conn, $sql);
+
+while($i = mysqli_fetch_assoc($rezultat)){
 
     if(
         isset($_SESSION['izloceni']) &&
@@ -152,28 +156,27 @@ while($i = $rezultat->fetch_assoc()){
 
 <p>Minuta:</p>
 
-<input type="number" name="minuta" min="1" max="90" required >
+<input type="number" name="minuta" min="1" max="90" required>
 
 <br><br>
 
-<button type="submit"> SHRANI GOL </button>
+<button type="submit">SHRANI GOL</button>
 
 </form>
 
 <?php
-if($napaka != ""){
-    echo "<p>".$napaka."</p>";
+if ($napaka != "") {
+    echo "<p>$napaka</p>";
 }
 ?>
 
 <br>
 
 <a href="index.php">
-    <button type="button"> Nazaj </button>
+    <button type="button">Nazaj</button>
 </a>
 
 </div>
 
 </body>
 </html>
-
