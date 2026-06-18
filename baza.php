@@ -1,12 +1,15 @@
 <?php
 
-$mysqli = new mysqli(
-    "sql204.infinityfree.com",
-    "if0_42007777",
-    "D49VHU8KmL4Gj",
-    "if0_42007777_statistike"
+$conn = mysqli_connect(
+    "localhost",
+    "root",
+    "",
+    "statistika"
 );
 
-if($mysqli->connect_error){
-    die("Napaka pri povezavi na bazo");
+if (!$conn) {
+    die("Napaka pri povezavi: " . mysqli_connect_error());
 }
+
+
+?>
