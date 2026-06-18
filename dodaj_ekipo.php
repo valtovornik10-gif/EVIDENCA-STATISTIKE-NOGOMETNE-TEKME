@@ -8,12 +8,12 @@ if($_SESSION['vloga'] != "administrator"){
 
 include "baza.php";
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+if(isset($_POST['naziv']) && isset($_POST['drzava'])){
 
     $naziv = $_POST['naziv'];
     $drzava = $_POST['drzava'];
 
-    $mysqli->query("
+    $sql = "
     INSERT INTO ekipa
     (
         naziv,
@@ -24,7 +24,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         '$naziv',
         '$drzava'
     )
-    ");
+    ";
+
+    mysqli_query($conn, $sql);
 
     header("Location:index.php");
     exit;
@@ -34,37 +36,38 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <!DOCTYPE html>
 <html lang="sl">
 <head>
-    <meta charset="UTF-8">
-    <title>Dodaj ekipo</title>
-    <link rel="stylesheet" href="glavna.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dodaj ekipo</title>
+<link rel="stylesheet" href="glavna.css">
 </head>
 <body>
 
 <div class="vsebnik">
 
-    <h1>DODAJ EKIPO</h1>
+<h1>DODAJ EKIPO</h1>
 
-    <form method="POST">
+<form method="POST">
 
-        <p>Naziv ekipe:</p>
-        <input type="text" name="naziv" required>
+<p>Naziv ekipe:</p>
+<input type="text" name="naziv" required>
 
-        <br><br>
+<br><br>
 
-        <p>Država:</p>
-        <input type="text" name="drzava" required>
+<p>Država:</p>
+<input type="text" name="drzava" required>
 
-        <br><br>
+<br><br>
 
-        <button type="submit">SHRANI EKIPO</button>
+<button type="submit">SHRANI EKIPO</button>
 
-    </form>
+</form>
 
-    <br>
+<br>
 
-    <a href="index.php">
-        <button type="button">NAZAJ</button>
-    </a>
+<a href="index.php">
+    <button type="button">NAZAJ</button>
+</a>
 
 </div>
 
