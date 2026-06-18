@@ -53,37 +53,35 @@ if(isset($_POST['igralecVen']) && isset($_POST['igralecNot'])){
 
             $_SESSION['zadnja_minuta'] = $minuta;
 
-            $rez1 = $mysqli->query("
+            $sql = "
                 SELECT ime, priimek
                 FROM igralec
                 WHERE id = $igralecVen
-            ");
+            ";
 
-            $ven = $rez1->fetch_assoc();
+            $rez1 = mysqli_query($conn, $sql);
+            $ven = mysqli_fetch_assoc($rez1);
 
             $imeVen =
                 $ven['ime']." ".
                 $ven['priimek'];
 
-            $rez2 = $mysqli->query("
+            $sql = "
                 SELECT ime, priimek
                 FROM igralec
                 WHERE id = $igralecNot
-            ");
+            ";
 
-            $not = $rez2->fetch_assoc();
+            $rez2 = mysqli_query($conn, $sql);
+            $not = mysqli_fetch_assoc($rez2);
 
             $imeNot =
                 $not['ime']." ".
                 $not['priimek'];
 
-            $izpis =
-                $minuta."' menjava: ".
-                $imeVen.
-                " ➜ ".
-                $imeNot;
+            $izpis = $minuta."' menjava: ". $imeVen. " -> ". $imeNot;
 
-            $mysqli->query("
+            $sql = "
                 INSERT INTO menjava_igralec
                 (
                     minuta,
@@ -98,7 +96,9 @@ if(isset($_POST['igralecVen']) && isset($_POST['igralecNot'])){
                     $igralecNot,
                     ".$_SESSION['tekma_id']."
                 )
-            ");
+            ";
+
+            mysqli_query($conn, $sql);
 
             if($ekipa == 1){
                 $_SESSION['dogodki1'][] = $izpis;
@@ -144,14 +144,16 @@ if(isset($_POST['igralecVen']) && isset($_POST['igralecNot'])){
 
 <?php
 
-$rezultat = $mysqli->query("
+$sql = "
 SELECT *
 FROM igralec
 WHERE ekipa_id = $ekipaId
 ORDER BY priimek
-");
+";
 
-while($i = $rezultat->fetch_assoc()){
+$rezultat = mysqli_query($conn, $sql);
+
+while($i = mysqli_fetch_assoc($rezultat)){
 
     if(
         isset($_SESSION['izloceni']) &&
@@ -184,25 +186,20 @@ while($i = $rezultat->fetch_assoc()){
 
 <?php
 
-$rezultat = $mysqli->query("
+$sql = "
 SELECT *
 FROM igralec
 WHERE ekipa_id = $ekipaId
 ORDER BY priimek
-");
+";
 
-while($i = $rezultat->fetch_assoc()){
+$rezultat = mysqli_query($conn, $sql);
+
+while($i = mysqli_fetch_assoc($rezultat)){
 
     if(
         isset($_SESSION['izloceni']) &&
         in_array($i['id'], $_SESSION['izloceni'])
-    ){
-        continue;
-    }
-
-    if(
-        isset($_SESSION['izven_igre']) &&
-        in_array($i['id'], $_SESSION['izven_igre'])
     ){
         continue;
     }
@@ -220,8 +217,7 @@ while($i = $rezultat->fetch_assoc()){
 
 <p>Minuta:</p>
 
-<input type="number" name="minuta" min="1" max="90" required
->
+<input type="number" name="minuta" min="1" max="90" required>
 
 <br><br>
 
@@ -238,7 +234,7 @@ if($napaka != ""){
 <br>
 
 <a href="index.php">
-    <button type="button"> Nazaj </button>
+    <button type="button">Nazaj</button>
 </a>
 
 </div>
