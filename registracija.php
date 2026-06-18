@@ -6,6 +6,7 @@ session_start();
 <html lang="sl">
 <head>
     <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registracija</title>
     <link rel="stylesheet" href="prijava.css">
 </head>
@@ -19,11 +20,6 @@ session_start();
     if(isset($_SESSION['napaka'])){
         echo "<p class='napaka'>".$_SESSION['napaka']."</p>";
         unset($_SESSION['napaka']);
-    }
-
-    if(isset($_SESSION['uspeh'])){
-        echo "<p class='uspeh'>".$_SESSION['uspeh']."</p>";
-        unset($_SESSION['uspeh']);
     }
     ?>
 
